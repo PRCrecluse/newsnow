@@ -1,0 +1,41 @@
+name = "newsnow"
+compatibility_date = "2024-10-04"
+compatibility_flags = ["nodejs_compat"]
+
+[env.production]
+vars = { NODE_ENV = "production" }
+
+# 数据库配置（如果需要）
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "newsnow-db"
+database_id = "your-database-id-here"
+
+# KV 存储配置（用于缓存，可选）
+[[env.production.kv_namespaces]]
+binding = "CACHE"
+id = "your-kv-namespace-id-here"
+
+[env.preview]
+vars = { NODE_ENV = "preview" }
+
+# 预览环境的数据库配置
+[[env.preview.d1_databases]]
+binding = "DB"
+database_name = "newsnow-db-preview"
+database_id = "your-preview-database-id-here"
+
+# 预览环境的 KV 配置
+[[env.preview.kv_namespaces]]
+binding = "CACHE"
+id = "your-preview-kv-namespace-id-here"
+
+# Pages 专用配置
+[build]
+command = "pnpm run build"
+cwd = "."
+watch_dir = "src"
+
+# 兼容性设置
+[compatibility_flags]
+experimental = ["nodejs_compat"]
